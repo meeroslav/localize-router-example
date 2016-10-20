@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  users: string[];
 
   constructor() { }
 
   ngOnInit() {
+    this.users = [
+      'Ada Lovelace',
+      'Niklaus Wirth',
+      'Donald Knuth',
+      'Bjarne Stroustrup',
+      'Edsger W. Dijkstra',
+      'Alan Turing',
+      'Anders Hejlsberg'
+    ]
   }
 
 }

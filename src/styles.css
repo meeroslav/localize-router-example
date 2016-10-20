@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+nav {
+  padding: 8px;
+  display: block;
+  border-bottom: 1px solid #c0c1c9;
+}
+nav a {
+  padding: 8px;
+}
+
+nav a + a {
+  border-left: 1px solid #c0c1c9;
+}
+p {
+  padding: 16px;
+}
+a {
+  color: black;
+}
+.router-link-active {
+  font-weight: bold;
+  color: #106cc8;
+}

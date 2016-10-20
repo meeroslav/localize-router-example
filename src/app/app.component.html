@@ -1,4 +1,8 @@
 <h1>
   {{title}}
 </h1>
+<nav>
+  <a [routerLink]="'/'" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">{{'HOME' | translate}}</a>
+  <a [routerLink]="'/users'" [routerLinkActive]="['router-link-active']">{{'USERS' | translate}}</a>
+</nav>
 <router-outlet></router-outlet>

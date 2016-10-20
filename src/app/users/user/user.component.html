@@ -1,3 +1,8 @@
+<nav>
+  <a [routerLink]="['../']">{{'BACK' | translate}}</a>
+  <a [routerLink]="['profile']">{{'PROFILE' | translate}}</a>
+</nav>
+<h2>USER</h2>
 <p>
-  user works!
+  {{user | async}} is awesome!
 </p>

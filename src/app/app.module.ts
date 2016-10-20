@@ -22,6 +22,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpModule,
+
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
