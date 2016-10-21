@@ -10,7 +10,6 @@ import {Observer} from 'rxjs/Observer';
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/observable/forkJoin';
 import {recognize} from "@angular/router/src/recognize";
-import {AppComponent} from "../app.component";
 
 interface ILocalizeRouteConfig {
   locales: Array<string>;
