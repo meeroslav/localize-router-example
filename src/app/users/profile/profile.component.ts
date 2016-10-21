@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import { Component } from '@angular/core';
+import { Observable } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-profile',
