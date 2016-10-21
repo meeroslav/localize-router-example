@@ -3,6 +3,8 @@
 
   <a [routerLink]="'/en'" [routerLinkActive]="['router-link-active']">EN</a>
   <a [routerLink]="'/de'" [routerLinkActive]="['router-link-active']">DE</a>
+  <button (click)="changeLanguage('en')">EN</button>
+  <button (click)="changeLanguage('de')">DE</button>
 </h1>
 <nav>
   <a [routerLink]="'/' | localize" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">{{'HOME' | translate}}</a>
