@@ -3,5 +3,8 @@
   "HOME": "Startseite >",
   "USERS": "Benutzer >",
   "PROFILE": "Profil >",
-  "BACK": "< Zurkuck"
+  "BACK": "< Zurkuck",
+
+  "ROUTES.users": "benutzer",
+  "ROUTES.profile": "profil"
 }

@@ -3,5 +3,8 @@
   "HOME": "Home >",
   "USERS": "Users >",
   "PROFILE": "Profile >",
-  "BACK": "< Back"
+  "BACK": "< Back",
+
+  "ROUTES.users": "users",
+  "ROUTES.profile": "profile"
 }

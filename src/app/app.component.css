@@ -15,6 +15,13 @@ h1 {
   margin: 0;
   display: block;
 }
+h1 a {
+  float: right;
+  padding: 0 8px;
+}
+h1 a.router-link-active {
+  color: White;
+}
 nav {
   padding: 8px;
   background-color: #d7d8d5;

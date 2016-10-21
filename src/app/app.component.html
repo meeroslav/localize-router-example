@@ -1,8 +1,11 @@
 <h1>
   {{title}}
+
+  <a [routerLink]="'/en'" [routerLinkActive]="['router-link-active']">EN</a>
+  <a [routerLink]="'/de'" [routerLinkActive]="['router-link-active']">DE</a>
 </h1>
 <nav>
-  <a [routerLink]="'/'" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">{{'HOME' | translate}}</a>
-  <a [routerLink]="'/users'" [routerLinkActive]="['router-link-active']">{{'USERS' | translate}}</a>
+  <a [routerLink]="'/' | localize" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">{{'HOME' | translate}}</a>
+  <a [routerLink]="'/users' | localize" [routerLinkActive]="['router-link-active']">{{'USERS' | translate}}</a>
 </nav>
 <router-outlet></router-outlet>
