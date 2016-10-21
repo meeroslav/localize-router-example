@@ -1,7 +1,7 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable, Inject, ApplicationRef} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {
-  Routes, Router, Route, NavigationStart, UrlSegment, RouterStateSnapshot,
+  Routes, Router, Route, NavigationStart, RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
 import {TranslateService} from 'ng2-translate';
@@ -225,7 +225,7 @@ export class LocalizeRouterService {
    * @param loader
    * @param router
    */
-  constructor(public loader: LocalizeLoader, private router: Router) {
+  constructor(public loader: LocalizeLoader, private router: Router, private appRef: ApplicationRef) {
     this.router.resetConfig(this.loader.routes);
     this.router.events.subscribe(this._routeChanged());
     this.routerEvents = new Subject<string>();
@@ -239,7 +239,7 @@ export class LocalizeRouterService {
     if (lang !== this.loader.currentLang) {
       let currentTree = this.router.parseUrl(location.pathname);
 
-      recognize(AppComponent, this.loader.routes, currentTree, location.pathname).subscribe((s: RouterStateSnapshot) =>{
+      recognize(this.appRef.componentTypes[0], this.loader.routes, currentTree, location.pathname).subscribe((s: RouterStateSnapshot) =>{
         this.loader.translateRoutes(lang).then(() => {
           let newUrl = this.traverseRouteSnapshot(s.root);
           history.pushState(null, '', newUrl);
