@@ -1,9 +1,6 @@
 import {Injectable, Inject, ApplicationRef} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {
-  Routes, Router, Route, NavigationStart, RouterStateSnapshot,
-  ActivatedRouteSnapshot
-} from '@angular/router';
+import {Routes, Router, Route, NavigationStart, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {TranslateService} from 'ng2-translate';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
@@ -17,9 +14,9 @@ interface ILocalizeRouteConfig {
 }
 
 /**
- * Abstract class for loading localization
+ * Abstract class for parsing localization
  */
-export abstract class LocalizeLoader {
+export abstract class LocalizeParser {
   locales: Array<string>;
   currentLang: string;
   routes: Routes;
@@ -162,7 +159,7 @@ export abstract class LocalizeLoader {
 /**
  * Manually set configuration
  */
-export class LocalizeManualLoader extends LocalizeLoader {
+export class ManualParserLoader extends LocalizeParser {
 
   constructor(
     @Inject(TranslateService) translate: TranslateService,
@@ -186,7 +183,7 @@ export class LocalizeManualLoader extends LocalizeLoader {
 /**
  * Load configuration from server
  */
-export class LocalizeStaticLoader extends LocalizeLoader {
+export class StaticParserLoader extends LocalizeParser {
 
   constructor(
     @Inject(TranslateService) translate: TranslateService,
@@ -221,11 +218,12 @@ export class LocalizeRouterService {
 
   /**
    * CTOR
-   * @param loader
+   * @param parser
    * @param router
+   * @param appRef
    */
-  constructor(public loader: LocalizeLoader, private router: Router, private appRef: ApplicationRef) {
-    this.router.resetConfig(this.loader.routes);
+  constructor(public parser: LocalizeParser, private router: Router, private appRef: ApplicationRef) {
+    this.router.resetConfig(this.parser.routes);
     this.router.events.subscribe(this._routeChanged());
     this.routerEvents = new Subject<string>();
   }
@@ -235,11 +233,11 @@ export class LocalizeRouterService {
    * @param lang
    */
   changeLanguage(lang: string) {
-    if (lang !== this.loader.currentLang) {
+    if (lang !== this.parser.currentLang) {
       let currentTree = this.router.parseUrl(location.pathname);
 
-      recognize(this.appRef.componentTypes[0], this.loader.routes, currentTree, location.pathname).subscribe((s: RouterStateSnapshot) =>{
-        this.loader.translateRoutes(lang).then(() => {
+      recognize(this.appRef.componentTypes[0], this.parser.routes, currentTree, location.pathname).subscribe((s: RouterStateSnapshot) =>{
+        this.parser.translateRoutes(lang).then(() => {
           let newUrl = this.traverseRouteSnapshot(s.root);
           history.pushState(null, '', newUrl);
         });
@@ -247,6 +245,11 @@ export class LocalizeRouterService {
     }
   }
 
+  /**
+   * Traverses through the tree to assemble new translated url
+   * @param snapshot
+   * @returns {string}
+   */
   private traverseRouteSnapshot(snapshot: ActivatedRouteSnapshot): string {
     if (snapshot.firstChild) {
       return this.parseSegmentValue(snapshot) + '/' + this.traverseRouteSnapshot(snapshot.firstChild);
@@ -254,12 +257,17 @@ export class LocalizeRouterService {
     return this.parseSegmentValue(snapshot);
   }
 
+  /**
+   * Extracts new segment value based on routeConfig and url
+   * @param snapshot
+   * @returns {any}
+   */
   private parseSegmentValue(snapshot: ActivatedRouteSnapshot): string {
     if (snapshot.routeConfig) {
       let subPathSegments = snapshot.routeConfig.path.split('/');
       return subPathSegments.
-        map((s: string, i: number) => s.indexOf(':') === 0 ? snapshot.url[i].path : s).
-        join('/');
+      map((s: string, i: number) => s.indexOf(':') === 0 ? snapshot.url[i].path : s).
+      join('/');
     }
     return '';
   }
@@ -277,10 +285,10 @@ export class LocalizeRouterService {
       prependLanguage = startsWithBackslash;
     }
     let interpolated = prependLanguage ?
-      startsWithBackslash ? `/${this.loader.currentLang}${path}` : `/${this.loader.currentLang}/${path}` :
+      startsWithBackslash ? `/${this.parser.currentLang}${path}` : `/${this.parser.currentLang}/${path}` :
       path;
 
-    return this.loader.translateRoute(interpolated);
+    return this.parser.translateRoute(interpolated);
   }
 
   /**
@@ -292,9 +300,9 @@ export class LocalizeRouterService {
     let self = this;
 
     return (event: any) => {
-      let lang = self.loader.getLocationLang(event.url);
-      if (event instanceof NavigationStart && lang && lang !== this.loader.currentLang) {
-        this.loader.translateRoutes(lang);
+      let lang = self.parser.getLocationLang(event.url);
+      if (event instanceof NavigationStart && lang && lang !== this.parser.currentLang) {
+        this.parser.translateRoutes(lang);
 
         /** Fire route change event */
         this.routerEvents.next(lang);
