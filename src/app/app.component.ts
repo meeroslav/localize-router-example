@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LocalizeRouterService} from "./localize-router/localize-router.service";
+import {LocalizeRouterService} from 'localize-router';
 
 @Component({
   selector: 'app-root',

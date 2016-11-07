@@ -5,7 +5,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from "@angular/router";
-import {LocalizeRouterModule} from "./localize-router/localize-router.module";
+import { LocalizeRouterModule } from "localize-router";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, '/assets/locales', '.json');

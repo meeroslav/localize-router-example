@@ -5,7 +5,7 @@ import { UserComponent } from './user/user.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from 'ng2-translate';
-import { LocalizeRouterModule } from "../localize-router/localize-router.module";
+import { LocalizeRouterModule } from 'localize-router';
 
 @NgModule({
   imports: [
