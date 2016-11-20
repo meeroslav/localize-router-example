@@ -6,5 +6,6 @@
   "BACK": "< Zurkuck",
 
   "ROUTES.users": "benutzer",
-  "ROUTES.profile": "profil"
+  "ROUTES.profile": "profil",
+  "ROUTES.home": "startseite"
 }

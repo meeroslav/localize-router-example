@@ -7,7 +7,8 @@
   <button (click)="changeLanguage('de')">DE</button>
 </h1>
 <nav>
-  <a [routerLink]="'/' | localize" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">{{'HOME' | translate}}</a>
+  <a [routerLink]="'/home' | localize" [routerLinkActive]="['router-link-active']"
+     [routerLinkActiveOptions]="{exact:true}">{{'HOME' | translate}}</a>
   <a [routerLink]="'/users' | localize" [routerLinkActive]="['router-link-active']">{{'USERS' | translate}}</a>
 </nav>
 <router-outlet></router-outlet>

@@ -6,5 +6,6 @@
   "BACK": "< Back",
 
   "ROUTES.users": "users",
-  "ROUTES.profile": "profile"
+  "ROUTES.profile": "profile",
+  "ROUTES.home": "home"
 }

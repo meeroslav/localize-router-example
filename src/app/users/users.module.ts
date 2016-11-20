@@ -7,16 +7,18 @@ import { CommonModule } from "@angular/common";
 import { TranslateModule } from 'ng2-translate';
 import { LocalizeRouterModule } from 'localize-router';
 
+let routes = [
+  { path: '', component: UsersComponent },
+  { path: ':id', component: UserComponent },
+  { path: ':id/profile', component: ProfileComponent }
+];
+
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
-    LocalizeRouterModule,
-    RouterModule.forChild([
-      { path: '', component: UsersComponent },
-      { path: ':id', component: UserComponent },
-      { path: ':id/profile', component: ProfileComponent }
-    ])
+    LocalizeRouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
   declarations: [UsersComponent, UserComponent, ProfileComponent]
 })
