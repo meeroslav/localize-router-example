@@ -8,9 +8,13 @@ import { TranslateModule } from 'ng2-translate';
 import { LocalizeRouterModule } from 'localize-router';
 
 let routes = [
-  { path: '', component: UsersComponent },
-  { path: ':id', component: UserComponent },
-  { path: ':id/profile', component: ProfileComponent }
+  { path: 'users',
+    children: [
+      { path: '', component: UsersComponent },
+      { path: ':id', component: UserComponent },
+      { path: ':id/profile', component: ProfileComponent }
+    ]
+  }
 ];
 
 @NgModule({
