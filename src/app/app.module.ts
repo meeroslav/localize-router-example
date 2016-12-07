@@ -13,9 +13,9 @@ export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, '/assets/locales', '.json');
 }
 
-export function localizeLoaderFactory(translate: TranslateService, http: Http) {
-  return new StaticParserLoader(translate, http);
-}
+// export function localizeLoaderFactory(translate: TranslateService, http: Http) {
+//   return new StaticParserLoader(translate, http);
+// }
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }
@@ -34,11 +34,13 @@ const routes: Routes = [
       deps: [Http]
     }),
     RouterModule.forRoot(routes),
-    LocalizeRouterModule.forRoot(routes, {
-      provide: LocalizeParser,
-      useFactory: localizeLoaderFactory,
-      deps: [TranslateService, Http]
-    }),
+    LocalizeRouterModule.forRoot(routes
+    //   , {
+    //   provide: LocalizeParser,
+    //   useFactory: localizeLoaderFactory,
+    //   deps: [TranslateService, Http]
+    // }
+    ),
     HomeModule,
     UsersModule
   ],
