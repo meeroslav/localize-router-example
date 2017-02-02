@@ -1,6 +1,6 @@
 import './polyfills.ts';
-
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import './__2.1.1.workaround.ts'; // temporary until 2.1.1 things are patched in Core
+import { platformUniversalDynamic } from 'angular2-universal';
 import { enableProdMode } from '@angular/core';
 import { environment } from './environments/environment';
 import { AppModule } from './app/';
@@ -9,4 +9,4 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformUniversalDynamic().bootstrapModule(AppModule);

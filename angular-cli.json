@@ -6,17 +6,18 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist/client",
       "assets": [
         "assets",
         "favicon.ico"
       ],
       "index": "index.html",
-      "main": "main.ts",
+      "main": "client.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "mobile": false,
+      "universal": true,
       "styles": [
         "styles.css"
       ],
@@ -25,6 +26,10 @@
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      },
+      "webpackCustom": {
+        "client": "webpack.client.ts",
+        "server": "webpack.server.ts"
       }
     }
   ],
