@@ -13,6 +13,7 @@
       ],
       "index": "index.html",
       "main": "client.ts",
+      "nodeMain": "server.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
