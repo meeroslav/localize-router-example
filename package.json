@@ -28,7 +28,7 @@
     "compression": "^1.6.2",
     "core-js": "^2.4.1",
     "express": "^4.14.1",
-    "localize-router": "^0.5.0",
+    "localize-router": "^0.6.0",
     "ng2-translate": "^5.0.0",
     "preboot": "^4.5.2",
     "rxjs": "5.0.1",
