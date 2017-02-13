@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { HomeModule } from './home/home.module';
 import { LocalizeRouterModule, LocalizeParser } from 'localize-router';
 import { UsersModule } from './users/users.module';
+import { Location } from '@angular/common';
 
 let fs = require('fs');
 
@@ -41,12 +42,13 @@ export class LocalizeUniversalLoader extends LocalizeParser {
   }
 }
 
-export function localizeLoaderFactory(translate: TranslateService) {
-  return new LocalizeUniversalLoader(translate);
+export function localizeLoaderFactory(translate: TranslateService, location: Location) {
+  return new LocalizeUniversalLoader(translate, location);
 }
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
