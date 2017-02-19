@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { LocalizeRouterService } from 'localize-router';
 
 @Component({
   selector: 'app-user',
@@ -10,8 +11,13 @@ import { Observable } from "rxjs";
 export class UserComponent {
   user: Observable<string>;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private localize: LocalizeRouterService, private router: Router) {
     this.user = route.params.map((p: any) => p.id);
   }
 
+  goBack() {
+    this.localize.translateRoute('../').subscribe((path: string) => {
+      this.router.navigate([path], { relativeTo: this.route });
+    });
+  }
 }
