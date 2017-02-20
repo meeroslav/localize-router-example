@@ -1,6 +1,6 @@
 import { UniversalModule } from 'angular2-universal';
 import { NgModule } from '@angular/core';
-import { TranslateModule, TranslateLoader, TranslateService } from 'ng2-translate';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -58,8 +58,7 @@ const routes: Routes = [
   imports: [
     UniversalModule,
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: TranslateUniversalLoader
+      loader: {provide: TranslateLoader, useFactory: TranslateUniversalLoader}
     }),
     RouterModule.forRoot(routes),
     LocalizeRouterModule.forRoot(routes, {
