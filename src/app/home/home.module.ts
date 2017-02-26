@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocalizeRouterModule } from 'localize-router';
 
 let routes = [
-  { path: '', component: HomeComponent }
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
