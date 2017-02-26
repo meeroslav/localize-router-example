@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { LocalizeRouterModule } from 'localize-router';
-import { UsersModule } from './users/users.module';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, '/assets/locales/', '.json');
@@ -16,6 +15,7 @@ export function createTranslateLoader(http: Http) {
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'users', loadChildren: './users/users.module#UsersModule' },
   { path: '**', redirectTo: 'home' }
 ];
 
@@ -34,8 +34,7 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes),
     LocalizeRouterModule.forRoot(routes),
-    HomeModule,
-    UsersModule
+    HomeModule
   ],
   exports: [RouterModule],
   bootstrap: [AppComponent]
