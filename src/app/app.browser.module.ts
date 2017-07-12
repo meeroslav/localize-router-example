@@ -1,4 +1,3 @@
-import { UniversalModule } from 'angular2-universal';
 import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -8,6 +7,7 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { LocalizeRouterModule } from 'localize-router';
+import { BrowserModule } from '@angular/platform-browser';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, '/assets/locales/', '.json');
@@ -20,11 +20,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  bootstrap: [ AppComponent ],
   imports: [
-    UniversalModule,
+    BrowserModule.withServerTransition({
+      appId: 'my-app-id'
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -36,7 +36,6 @@ const routes: Routes = [
     LocalizeRouterModule.forRoot(routes),
     HomeModule
   ],
-  exports: [RouterModule],
-  bootstrap: [AppComponent]
+  exports: [RouterModule]
 })
 export class AppModule { }

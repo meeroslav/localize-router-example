@@ -1,4 +1,6 @@
-import { UniversalModule } from 'angular2-universal';
+import { BrowserModule } from '@angular/platform-browser';
+import { ServerModule } from '@angular/platform-server';
+
 import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 
@@ -11,7 +13,7 @@ import { LocalizeRouterModule, LocalizeParser } from 'localize-router';
 import { UsersModule } from './users/users.module';
 import { Location } from '@angular/common';
 
-let fs = require('fs');
+const fs = require('fs');
 
 export class TranslateUniversalLoader implements TranslateLoader {
   /**
@@ -52,11 +54,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  bootstrap: [ AppComponent ],
   imports: [
-    UniversalModule,
+    BrowserModule.withServerTransition({
+      appId: 'my-app-id'
+    }),
+    ServerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -72,7 +75,6 @@ const routes: Routes = [
     HomeModule,
     UsersModule
   ],
-  exports: [RouterModule],
-  bootstrap: [AppComponent]
+  exports: [RouterModule]
 })
 export class AppModule { }

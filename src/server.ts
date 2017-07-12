@@ -1,32 +1,25 @@
 /**
  * the polyfills must be the first thing imported
  */
-import './polyfills.ts';
 import * as express from 'express';
 import * as path from 'path';
 import * as compression from 'compression';
 
-import { createEngine } from 'angular2-express-engine';
+import { ngExpressEngine } from '@nguniversal/express-engine';
 import { enableProdMode } from '@angular/core';
-import { AppModule } from './app/app.node.module';
-import { environment } from './environments/environment';
+enableProdMode();
+import { AppModule } from './app/app.server.module';
 
 // App
 const app  = express();
 const ROOT = path.join(path.resolve(__dirname, '..'));
-const port = process.env.PORT || 4200;
-
-/**
- * enable prod mode for production environments
- */
-if (environment.production) {
-  enableProdMode();
-}
+const port = process.env.PORT || 8000;
+const baseUrl = `http://localhost:${port}`;
 
 /**
  * Express View
  */
-app.engine('.html', createEngine({}));
+app.engine('html', ngExpressEngine({ bootstrap: AppModule }));
 app.set('views', path.join(ROOT, 'client'));
 app.set('view engine', 'html');
 
@@ -60,5 +53,5 @@ function ngApp(req: any, res: any) {
 app.get('/', ngApp);
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Listening at ${baseUrl}`);
 });
